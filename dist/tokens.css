@@ -1,0 +1,53 @@
+/* Surmetric Core v0.1.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
+/* Tema oscuro opt-in: data-theme="dark" o class="dark" en <html> o en cualquier contenedor. */
+
+:root {
+  --sm-color-brand-teal: #00968E;
+  --sm-color-brand-teal-dark: #00766F;
+  --sm-color-brand-teal-light: #E6F5F3;
+  --sm-color-brand-teal-bright: #00B2AC;
+  --sm-color-brand-dark: #1B1F2A;
+  --sm-color-brand-dark-soft: #2D3140;
+  --sm-color-brand-gray-50: #F4F7FA;
+  --sm-color-brand-gray-100: #E1E8F0;
+  --sm-color-brand-gray-300: #B8C2CC;
+  --sm-color-brand-gray-500: #5D6978;
+  --sm-color-brand-gray-500-legacy: #8E9AA8;
+  --sm-color-brand-white: #FFFFFF;
+  --sm-color-danger: #DC2626;
+  --sm-color-warning: #D97706;
+  --sm-color-info: #2563EB;
+  --sm-color-canvas: #FFFFFF;
+  --sm-color-surface: #F4F7FA;
+  --sm-color-border: #E1E8F0;
+  --sm-color-ink: #1B1F2A;
+  --sm-color-ink-muted: #5D6978;
+  --sm-color-accent: #00968E;
+  --sm-color-accent-strong: #00766F;
+  --sm-color-accent-soft: #E6F5F3;
+  --sm-color-on-accent: #FFFFFF;
+  --sm-color-danger-soft: #FDECEC;
+  --sm-color-warning-soft: #FEF3E2;
+  --sm-font-sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --sm-font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --sm-font-mono: "Geist Mono", ui-monospace, monospace;
+  --sm-text-micro-11: 11px;
+  --sm-text-micro-10: 10px;
+  --sm-radius-card: 14px;
+  --sm-shadow-card-hover: 0 8px 24px -12px rgba(27, 31, 42, 0.25);
+  --sm-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"], .dark {
+  --sm-color-canvas: #1B1F2A;
+  --sm-color-surface: #2D3140;
+  --sm-color-border: #2D3140;
+  --sm-color-ink: #F4F7FA;
+  --sm-color-ink-muted: #8E9AA8;
+  --sm-color-accent: #00968E;
+  --sm-color-accent-strong: #00B2AC;
+  --sm-color-accent-soft: #17323A;
+  --sm-color-on-accent: #FFFFFF;
+  --sm-color-danger-soft: #3A2029;
+  --sm-color-warning-soft: #392D24;
+}

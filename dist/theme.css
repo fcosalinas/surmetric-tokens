@@ -1,0 +1,71 @@
+/* Surmetric Core v0.1.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
+/* Tailwind 4: @import "tailwindcss"; @import "surmetric-tokens/theme.css"; */
+
+@theme {
+  --color-brand-teal: #00968E;
+  --color-brand-teal-dark: #00766F;
+  --color-brand-teal-light: #E6F5F3;
+  --color-brand-teal-bright: #00B2AC;
+  --color-brand-dark: #1B1F2A;
+  --color-brand-dark-soft: #2D3140;
+  --color-brand-gray-50: #F4F7FA;
+  --color-brand-gray-100: #E1E8F0;
+  --color-brand-gray-300: #B8C2CC;
+  --color-brand-gray-500: #5D6978;
+  --color-brand-gray-500-legacy: #8E9AA8;
+  --color-brand-white: #FFFFFF;
+  --color-danger: #DC2626;
+  --color-warning: #D97706;
+  --color-info: #2563EB;
+  --font-sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --text-micro-11: 11px;
+  --text-micro-10: 10px;
+  --radius-card: 14px;
+  --shadow-card-hover: 0 8px 24px -12px rgba(27, 31, 42, 0.25);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Semánticos: inline para que el tema oscuro funcione también en un subárbol. */
+@theme inline {
+  --color-canvas: var(--sm-color-canvas);
+  --color-surface: var(--sm-color-surface);
+  --color-border: var(--sm-color-border);
+  --color-ink: var(--sm-color-ink);
+  --color-ink-muted: var(--sm-color-ink-muted);
+  --color-accent: var(--sm-color-accent);
+  --color-accent-strong: var(--sm-color-accent-strong);
+  --color-accent-soft: var(--sm-color-accent-soft);
+  --color-on-accent: var(--sm-color-on-accent);
+  --color-danger-soft: var(--sm-color-danger-soft);
+  --color-warning-soft: var(--sm-color-warning-soft);
+}
+
+:root {
+  --sm-color-canvas: #FFFFFF;
+  --sm-color-surface: #F4F7FA;
+  --sm-color-border: #E1E8F0;
+  --sm-color-ink: #1B1F2A;
+  --sm-color-ink-muted: #5D6978;
+  --sm-color-accent: #00968E;
+  --sm-color-accent-strong: #00766F;
+  --sm-color-accent-soft: #E6F5F3;
+  --sm-color-on-accent: #FFFFFF;
+  --sm-color-danger-soft: #FDECEC;
+  --sm-color-warning-soft: #FEF3E2;
+}
+
+[data-theme="dark"], .dark {
+  --sm-color-canvas: #1B1F2A;
+  --sm-color-surface: #2D3140;
+  --sm-color-border: #2D3140;
+  --sm-color-ink: #F4F7FA;
+  --sm-color-ink-muted: #8E9AA8;
+  --sm-color-accent: #00968E;
+  --sm-color-accent-strong: #00B2AC;
+  --sm-color-accent-soft: #17323A;
+  --sm-color-on-accent: #FFFFFF;
+  --sm-color-danger-soft: #3A2029;
+  --sm-color-warning-soft: #392D24;
+}

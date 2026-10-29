@@ -1,0 +1,42 @@
+{
+  "name": "surmetric-tokens",
+  "version": "0.1.0",
+  "description": "Design tokens Core de Surmetric: una fuente (tokens/tokens.json), salidas para CSS, Tailwind 3, Tailwind 4 y TypeScript.",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "Surmetric SpA",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcosalinas/surmetric-tokens.git"
+  },
+  "type": "commonjs",
+  "main": "./dist/tokens.js",
+  "types": "./dist/tokens.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/tokens.d.ts",
+      "default": "./dist/tokens.js"
+    },
+    "./tokens.ts": "./dist/tokens.ts",
+    "./tokens.css": "./dist/tokens.css",
+    "./theme.css": "./dist/theme.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./tailwind": "./dist/tailwind.js",
+    "./tokens.json": "./tokens/tokens.json",
+    "./fonts/*": "./fonts/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "fonts",
+    "tokens"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check"
+  },
+  "devDependencies": {
+    "@fontsource-variable/montserrat": "5.3.0",
+    "geist": "1.8.2"
+  }
+}
