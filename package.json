@@ -1,6 +1,6 @@
 {
   "name": "surmetric-tokens",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Design tokens Core de Surmetric: una fuente (tokens/tokens.json), salidas para CSS, Tailwind 3, Tailwind 4 y TypeScript.",
   "private": true,
   "license": "UNLICENSED",

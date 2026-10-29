@@ -18,7 +18,7 @@ Design tokens **Core** de Surmetric. Una sola fuente de verdad, `tokens/tokens.j
 Sin registry: se instala desde el tag de git.
 
 ```sh
-npm install github:fcosalinas/surmetric-tokens#v0.2.0
+npm install github:fcosalinas/surmetric-tokens#v0.2.1
 ```
 
 El repo es privado. La máquina que instala (también la de CI o Vercel) necesita acceso de lectura a GitHub.

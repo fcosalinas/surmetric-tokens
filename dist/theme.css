@@ -1,5 +1,5 @@
-/* Surmetric Core v0.2.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
-/* Tailwind 4: @import "tailwindcss"; @import "surmetric-tokens/theme.css"; */
+/* Surmetric Core v0.2.1 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
+/* Tailwind 4: importar justo después de tailwindcss en el CSS de entrada (ver README). */
 
 @theme {
   --color-brand-teal: #00968E;

@@ -1,5 +1,5 @@
 "use strict";
-// Surmetric Core v0.2.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
+// Surmetric Core v0.2.1 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
 
 exports.themes = ["light","dark"];
 

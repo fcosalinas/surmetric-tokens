@@ -2,6 +2,13 @@
 
 Política de versiones y de qué cuenta como breaking: README, "Desarrollo y versiones".
 
+## 0.2.1 — 2026-10-29
+
+Parche: ningún valor de token cambia.
+
+- `dist/theme.css`: el comentario de cabecera ya no contiene el texto `@import "tailwindcss"`. La versión de Tailwind para navegador (`@tailwindcss/browser`) lo detectaba dentro de un `<style type="text/tailwindcss">` y dejaba de aplicar el tema. Con build (Vite, Next, CLI) no afectaba.
+- `logo/`: el viewBox queda ceñido a la tinta de verdad. `scripts/logo.py` calculaba el borde del isotipo como si las uniones fueran en punta (15 px de trazo fuera del vértice) y son redondeadas (6.7 px), así que sobraban ~8 px a cada lado. Isotipo: `13.3 5.3 422.4 277.4`; lockup: 1840.61 de ancho. El dibujo no cambia.
+
 ## 0.2.0 — 2026-10-29
 
 Aplica las decisiones de la Fase A (`docs/DECISIONES-PENDIENTES.md`).

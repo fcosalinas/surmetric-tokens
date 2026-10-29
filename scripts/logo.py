@@ -66,10 +66,11 @@ def isotipo(pal):
             f"    {body}\n  </g>")
 
 
-# Extremos del isotipo con el trazo incluido (la mitad del trazo sobresale del contorno).
-HALF_X = STROKE / 2 * 5 ** 0.5        # inset horizontal en aristas de pendiente 1/2
-HALF_Y = STROKE / 2 * 5 ** 0.5 / 2    # inset vertical en esas aristas
-ISO_BOX = (108 - A - HALF_X, 56 - A / 2 - HALF_Y, 341 + A + HALF_X, 144 + A / 2 + A + HALF_Y)
+# Extremos del isotipo con el trazo incluido. Los cuatro extremos son vértices (oeste del cubo
+# izquierdo, norte del de atrás, este del teal, sur del de adelante) y con unión redondeada el
+# trazo sobresale de un vértice exactamente medio trazo en cualquier dirección.
+HALF = STROKE / 2
+ISO_BOX = (108 - A - HALF, 56 - A / 2 - HALF, 341 + A + HALF, 144 + A / 2 + A + HALF)
 
 # ---------- Wordmark: Montserrat 700 "SUR" + 400 "METRIC", sin tracking ----------
 

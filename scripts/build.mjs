@@ -160,7 +160,7 @@ ${darkVars(2)}
 `;
 
 const themeCss = `/* ${HEADER} */
-/* Tailwind 4: @import "tailwindcss"; @import "surmetric-tokens/theme.css"; */
+/* Tailwind 4: importar justo después de tailwindcss en el CSS de entrada (ver README). */
 
 @theme {
 ${primitives.map((t) => `  --color-${t.name}: ${valueIn(t, "light")};`).join("\n")}

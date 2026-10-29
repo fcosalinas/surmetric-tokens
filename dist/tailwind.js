@@ -1,4 +1,4 @@
-// Surmetric Core v0.2.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
+// Surmetric Core v0.2.1 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
 // Preset para Tailwind 3: presets: [require("surmetric-tokens/tailwind")]
 module.exports = {
   theme: {
