@@ -1,4 +1,4 @@
-/* Surmetric Core v0.1.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
+/* Surmetric Core v0.2.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
 /* Tema oscuro opt-in: data-theme="dark" o class="dark" en <html> o en cualquier contenedor. */
 
 :root {
@@ -11,8 +11,8 @@
   --sm-color-brand-gray-50: #F4F7FA;
   --sm-color-brand-gray-100: #E1E8F0;
   --sm-color-brand-gray-300: #B8C2CC;
+  --sm-color-brand-gray-400: #8E9AA8;
   --sm-color-brand-gray-500: #5D6978;
-  --sm-color-brand-gray-500-legacy: #8E9AA8;
   --sm-color-brand-white: #FFFFFF;
   --sm-color-danger: #DC2626;
   --sm-color-warning: #D97706;
@@ -26,13 +26,80 @@
   --sm-color-accent-strong: #00766F;
   --sm-color-accent-soft: #E6F5F3;
   --sm-color-on-accent: #FFFFFF;
+  --sm-color-action: #00766F;
+  --sm-color-action-hover: #1B1F2A;
+  --sm-color-on-action: #FFFFFF;
   --sm-color-danger-soft: #FDECEC;
   --sm-color-warning-soft: #FEF3E2;
   --sm-font-sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --sm-font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --sm-font-mono: "Geist Mono", ui-monospace, monospace;
+  --sm-text-display: 3rem;
+  --sm-leading-display: 1.05;
+  --sm-weight-display: 900;
+  --sm-tracking-display: -0.025em;
+  --sm-text-title-1: 1.875rem;
+  --sm-leading-title-1: 2.25rem;
+  --sm-weight-title-1: 900;
+  --sm-tracking-title-1: -0.025em;
+  --sm-text-title-2: 1.5rem;
+  --sm-leading-title-2: 2rem;
+  --sm-weight-title-2: 800;
+  --sm-tracking-title-2: -0.02em;
+  --sm-text-title-3: 1.25rem;
+  --sm-leading-title-3: 1.75rem;
+  --sm-weight-title-3: 700;
+  --sm-tracking-title-3: -0.01em;
+  --sm-text-title-4: 1.125rem;
+  --sm-leading-title-4: 1.75rem;
+  --sm-weight-title-4: 700;
+  --sm-tracking-title-4: 0;
+  --sm-text-6xl: 3.75rem;
+  --sm-leading-6xl: 1;
+  --sm-text-5xl: 3rem;
+  --sm-leading-5xl: 1;
+  --sm-text-4xl: 2.25rem;
+  --sm-leading-4xl: 2.5rem;
+  --sm-text-3xl: 1.875rem;
+  --sm-leading-3xl: 2.25rem;
+  --sm-text-2xl: 1.5rem;
+  --sm-leading-2xl: 2rem;
+  --sm-text-xl: 1.25rem;
+  --sm-leading-xl: 1.75rem;
+  --sm-text-lg: 1.125rem;
+  --sm-leading-lg: 1.75rem;
+  --sm-text-base: 1rem;
+  --sm-leading-base: 1.5rem;
+  --sm-text-sm: 0.875rem;
+  --sm-leading-sm: 1.25rem;
+  --sm-text-xs: 0.75rem;
+  --sm-leading-xs: 1rem;
+  --sm-text-eyebrow: 0.75rem;
+  --sm-leading-eyebrow: 1rem;
+  --sm-weight-eyebrow: 600;
+  --sm-tracking-eyebrow: 0.1em;
   --sm-text-micro-11: 11px;
   --sm-text-micro-10: 10px;
+  --sm-space-0_5: 0.125rem;
+  --sm-space-1: 0.25rem;
+  --sm-space-1_5: 0.375rem;
+  --sm-space-2: 0.5rem;
+  --sm-space-2_5: 0.625rem;
+  --sm-space-3: 0.75rem;
+  --sm-space-4: 1rem;
+  --sm-space-5: 1.25rem;
+  --sm-space-6: 1.5rem;
+  --sm-space-8: 2rem;
+  --sm-space-10: 2.5rem;
+  --sm-space-12: 3rem;
+  --sm-space-14: 3.5rem;
+  --sm-space-16: 4rem;
+  --sm-space-20: 5rem;
+  --sm-space-24: 6rem;
+  --sm-space-32: 8rem;
+  --sm-radius-control: 6px;
+  --sm-radius-button: 6px;
+  --sm-radius-pill: 9999px;
   --sm-radius-card: 14px;
   --sm-shadow-card-hover: 0 8px 24px -12px rgba(27, 31, 42, 0.25);
   --sm-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -48,6 +115,9 @@
   --sm-color-accent-strong: #00B2AC;
   --sm-color-accent-soft: #17323A;
   --sm-color-on-accent: #FFFFFF;
+  --sm-color-action: #00B2AC;
+  --sm-color-action-hover: #00968E;
+  --sm-color-on-action: #1B1F2A;
   --sm-color-danger-soft: #3A2029;
   --sm-color-warning-soft: #392D24;
 }

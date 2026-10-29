@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5.02 4.51 438.96 278.98" width="438.96" height="278.98" role="img" aria-label="Surmetric">
+  <title>Surmetric</title>
+  <g stroke="#1B1F2A" stroke-width="13.4" stroke-linejoin="round">
+    <polygon points="196,12 284,56 196,100 108,56" fill="#E1E8F0"/>
+    <polygon points="108,56 196,100 196,188 108,144" fill="#8E9AA8"/>
+    <polygon points="196,100 284,56 284,144 196,188" fill="#B8C2CC"/>
+    <polygon points="108,56 196,100 108,144 20,100" fill="#E1E8F0"/>
+    <polygon points="20,100 108,144 108,232 20,188" fill="#8E9AA8"/>
+    <polygon points="108,144 196,100 196,188 108,232" fill="#B8C2CC"/>
+    <polygon points="341,56 429,100 341,144 253,100" fill="#00B2AC"/>
+    <polygon points="253,100 341,144 341,232 253,188" fill="#00766F"/>
+    <polygon points="341,144 429,100 429,188 341,232" fill="#00968E"/>
+    <polygon points="196,100 284,144 196,188 108,144" fill="#E1E8F0"/>
+    <polygon points="108,144 196,188 196,276 108,232" fill="#8E9AA8"/>
+    <polygon points="196,188 284,144 284,232 196,276" fill="#B8C2CC"/>
+  </g>
+</svg>

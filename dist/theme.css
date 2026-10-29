@@ -1,4 +1,4 @@
-/* Surmetric Core v0.1.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
+/* Surmetric Core v0.2.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano. */
 /* Tailwind 4: @import "tailwindcss"; @import "surmetric-tokens/theme.css"; */
 
 @theme {
@@ -11,8 +11,8 @@
   --color-brand-gray-50: #F4F7FA;
   --color-brand-gray-100: #E1E8F0;
   --color-brand-gray-300: #B8C2CC;
+  --color-brand-gray-400: #8E9AA8;
   --color-brand-gray-500: #5D6978;
-  --color-brand-gray-500-legacy: #8E9AA8;
   --color-brand-white: #FFFFFF;
   --color-danger: #DC2626;
   --color-warning: #D97706;
@@ -20,8 +20,56 @@
   --font-sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
+  --text-display: 3rem;
+  --text-display--line-height: 1.05;
+  --text-display--font-weight: 900;
+  --text-display--letter-spacing: -0.025em;
+  --text-title-1: 1.875rem;
+  --text-title-1--line-height: 2.25rem;
+  --text-title-1--font-weight: 900;
+  --text-title-1--letter-spacing: -0.025em;
+  --text-title-2: 1.5rem;
+  --text-title-2--line-height: 2rem;
+  --text-title-2--font-weight: 800;
+  --text-title-2--letter-spacing: -0.02em;
+  --text-title-3: 1.25rem;
+  --text-title-3--line-height: 1.75rem;
+  --text-title-3--font-weight: 700;
+  --text-title-3--letter-spacing: -0.01em;
+  --text-title-4: 1.125rem;
+  --text-title-4--line-height: 1.75rem;
+  --text-title-4--font-weight: 700;
+  --text-title-4--letter-spacing: 0;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1rem;
+  --text-eyebrow--font-weight: 600;
+  --text-eyebrow--letter-spacing: 0.1em;
   --text-micro-11: 11px;
   --text-micro-10: 10px;
+  --spacing: 0.25rem; /* = Tailwind por defecto: los pasos de Core son múltiplos de 4px */
+  --radius-control: 6px;
+  --radius-button: 6px;
+  --radius-pill: 9999px;
   --radius-card: 14px;
   --shadow-card-hover: 0 8px 24px -12px rgba(27, 31, 42, 0.25);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -38,6 +86,9 @@
   --color-accent-strong: var(--sm-color-accent-strong);
   --color-accent-soft: var(--sm-color-accent-soft);
   --color-on-accent: var(--sm-color-on-accent);
+  --color-action: var(--sm-color-action);
+  --color-action-hover: var(--sm-color-action-hover);
+  --color-on-action: var(--sm-color-on-action);
   --color-danger-soft: var(--sm-color-danger-soft);
   --color-warning-soft: var(--sm-color-warning-soft);
 }
@@ -52,6 +103,9 @@
   --sm-color-accent-strong: #00766F;
   --sm-color-accent-soft: #E6F5F3;
   --sm-color-on-accent: #FFFFFF;
+  --sm-color-action: #00766F;
+  --sm-color-action-hover: #1B1F2A;
+  --sm-color-on-action: #FFFFFF;
   --sm-color-danger-soft: #FDECEC;
   --sm-color-warning-soft: #FEF3E2;
 }
@@ -66,6 +120,9 @@
   --sm-color-accent-strong: #00B2AC;
   --sm-color-accent-soft: #17323A;
   --sm-color-on-accent: #FFFFFF;
+  --sm-color-action: #00B2AC;
+  --sm-color-action-hover: #00968E;
+  --sm-color-on-action: #1B1F2A;
   --sm-color-danger-soft: #3A2029;
   --sm-color-warning-soft: #392D24;
 }

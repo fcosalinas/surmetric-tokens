@@ -20,7 +20,7 @@ const stale = [];
 const NAME_RE = /^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$/;
 const HEX_RE = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
 const ALIAS_RE = /^\{([^}]+)\}$/;
-const FAMILIES = ["color", "radius", "shadow", "easing"];
+const FAMILIES = ["color", "spacing", "radius", "shadow", "easing"];
 const themes = src.color.themes.map((t) => t.id);
 const seen = new Set();
 
@@ -39,6 +39,8 @@ for (const g of src.type.groups) for (const s of g.styles) {
   if (!NAME_RE.test(s.name)) errors.push(`type: nombre inválido ${s.name}`);
   if (!s.usage) errors.push(`type.${s.name}: falta usage`);
 }
+// Un "." en el nombre exige escape en una variable CSS (--sm-space-0\.5): se usa "_".
+for (const t of src.spacing.tokens) if (t.name.includes(".")) errors.push(`spacing: usar "_" en vez de "." en ${t.name}`);
 
 // ---------- Resolución de colores ----------
 
@@ -64,6 +66,15 @@ const valueIn = (t, theme) =>
 const primitives = src.color.tokens.filter((t) => !isThemed(t));
 const semantic = src.color.tokens.filter(isThemed);
 const fontSizes = src.type.groups.flatMap((g) => g.styles);
+const spacing = src.spacing.tokens;
+// Propiedades opcionales de un estilo de texto: clave en tokens.json, prefijo en tokens.css, sufijo en Tailwind 4.
+const TYPE_PROPS = [
+  ["lineHeight", "leading", "line-height"],
+  ["fontWeight", "weight", "font-weight"],
+  ["letterSpacing", "tracking", "letter-spacing"],
+];
+const typeExtras = (s) => TYPE_PROPS.filter(([k]) => s[k] !== undefined)
+  .map(([k, css, tw4]) => ({ k, css, tw4, v: String(s[k]) }));
 const radius = src.radius.tokens;
 const shadow = src.shadow.tokens;
 const easing = src.easing.tokens;
@@ -87,6 +98,7 @@ const CONTRAST_RULES = [
   ["accent-strong", ["canvas", "surface"], 4.5],
   ["accent", ["canvas", "surface"], 3],
   ["ink", ["accent-soft", "danger-soft", "warning-soft"], 4.5],
+  ["on-action", ["action", "action-hover"], 4.5],
 ];
 const contrastReport = [];
 for (const theme of themes) for (const [fg, grounds, min] of CONTRAST_RULES) for (const bg of grounds) {
@@ -117,7 +129,11 @@ function cssVarsBlock(indent) {
   for (const t of primitives) lines.push(`--${PREFIX}-color-${t.name}: ${valueIn(t, "light")};`);
   for (const t of semantic) lines.push(`--${PREFIX}-color-${t.name}: ${valueIn(t, "light")};`);
   for (const [k, v] of Object.entries(families)) lines.push(`--${PREFIX}-font-${k}: ${v};`);
-  for (const s of fontSizes) lines.push(`--${PREFIX}-text-${s.name}: ${s.fontSize};`);
+  for (const s of fontSizes) {
+    lines.push(`--${PREFIX}-text-${s.name}: ${s.fontSize};`);
+    for (const x of typeExtras(s)) lines.push(`--${PREFIX}-${x.css}-${s.name}: ${x.v};`);
+  }
+  for (const t of spacing) lines.push(`--${PREFIX}-${t.name}: ${t.value};`);
   for (const t of radius) lines.push(`--${PREFIX}-${t.name}: ${t.value};`);
   for (const t of shadow) lines.push(`--${PREFIX}-${t.name}: ${t.value};`);
   for (const t of easing) lines.push(`--${PREFIX}-${t.name}: ${t.value};`);
@@ -149,7 +165,9 @@ const themeCss = `/* ${HEADER} */
 @theme {
 ${primitives.map((t) => `  --color-${t.name}: ${valueIn(t, "light")};`).join("\n")}
 ${Object.entries(families).map(([k, v]) => `  --font-${k}: ${v};`).join("\n")}
-${fontSizes.map((s) => `  --text-${s.name}: ${s.fontSize};`).join("\n")}
+${fontSizes.map((s) => [`  --text-${s.name}: ${s.fontSize};`,
+  ...typeExtras(s).map((x) => `  --text-${s.name}--${x.tw4}: ${x.v};`)].join("\n")).join("\n")}
+  --spacing: ${spacing.find((t) => t.name === "space-1").value}; /* = Tailwind por defecto: los pasos de Core son múltiplos de 4px */
 ${radius.map((t) => `  --${t.name}: ${t.value};`).join("\n")}
 ${shadow.map((t) => `  --${t.name}: ${t.value};`).join("\n")}
 ${easing.map((t) => `  --${t.name}: ${t.value};`).join("\n")}
@@ -183,7 +201,11 @@ module.exports = {
         ...semantic.map((t) => [t.name, q(`rgb(var(--${PREFIX}-rgb-${t.name}) / <alpha-value>)`)]),
       ], 6)},
       fontFamily: ${obj(Object.entries(families).map(([k, v]) => [k, q(v)]), 6)},
-      fontSize: ${obj(fontSizes.map((s) => [s.name, q(s.fontSize)]), 6)},
+      fontSize: ${obj(fontSizes.map((s) => {
+        const x = typeExtras(s);
+        return [s.name, x.length ? `[${q(s.fontSize)}, { ${x.map((e) => `${e.k}: ${q(e.v)}`).join(", ")} }]` : q(s.fontSize)];
+      }), 6)},
+      // Espaciado: la escala por defecto de Tailwind 3 ya es la de Core (base 4px); no se reemplaza.
       borderRadius: ${obj(radius.map((t) => [strip(t.name, "radius"), q(t.value)]), 6)},
       boxShadow: ${obj(shadow.map((t) => [strip(t.name, "shadow"), q(t.value)]), 6)},
       transitionTimingFunction: ${obj(easing.map((t) => [strip(t.name, "ease"), q(t.value)]), 6)},
@@ -217,6 +239,9 @@ const tsBody = (typed) => {
     decl("cssVar", obj(src.color.tokens.map((t) => [t.name, q(`var(--${PREFIX}-color-${t.name})`)]), 0)),
     decl("fontFamily", obj(Object.entries(families).map(([k, v]) => [k, q(v)]), 0)),
     decl("fontSize", obj(fontSizes.map((s) => [s.name, q(s.fontSize)]), 0)),
+    decl("typeStyles", obj(fontSizes.map((s) => [s.name,
+      `{ ${[["fontSize", s.fontSize], ...typeExtras(s).map((x) => [x.k, x.v])].map(([k, v]) => `${k}: ${q(v)}`).join(", ")} }`]), 0)),
+    decl("spacing", obj(spacing.map((t) => [t.name, q(t.value)]), 0)),
     decl("radius", obj(radius.map((t) => [t.name, q(t.value)]), 0)),
     decl("shadow", obj(shadow.map((t) => [t.name, q(t.value)]), 0)),
     decl("easing", obj(easing.map((t) => [t.name, q(t.value)]), 0)),
@@ -284,7 +309,16 @@ const tableTokens = [
   "| Token | Valor | Tailwind | Uso |",
   "|---|---|---|---|",
   ...Object.entries(families).map(([k, v]) => `| \`font-${k}\` | \`${md(v)}\` | \`font-${k}\` | Familia ${k}. |`),
-  ...fontSizes.map((s) => `| \`${s.name}\` | \`${s.fontSize}\` | \`text-${s.name}\` | ${md(s.usage)} |`),
+  "",
+  "| Estilo | Tamaño | Interlineado | Peso | Tracking | Tailwind | Uso |",
+  "|---|---|---|---|---|---|---|",
+  ...fontSizes.map((s) => `| \`${s.name}\` | \`${s.fontSize}\` | ${s.lineHeight ?? "hereda"} | ${s.fontWeight ?? "—"} | ${s.letterSpacing ?? "—"} | \`text-${s.name}\` | ${md(s.usage)} |`),
+  "",
+  "### Espaciado",
+  "",
+  "| Token | Valor | Tailwind | Uso |",
+  "|---|---|---|---|",
+  ...spacing.map((t) => `| \`${t.name}\` | \`${t.value}\` | \`p-${strip(t.name, "space").replace("_", ".")}\` | ${md(t.usage)} |`),
   "",
   "### Forma y movimiento",
   "",

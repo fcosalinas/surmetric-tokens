@@ -1,4 +1,4 @@
-// Surmetric Core v0.1.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
+// Surmetric Core v0.2.0 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
 
 export declare const themes: readonly ["light","dark"];
 
@@ -12,8 +12,8 @@ export declare const colors: {
   "brand-gray-50": "#F4F7FA",
   "brand-gray-100": "#E1E8F0",
   "brand-gray-300": "#B8C2CC",
+  "brand-gray-400": "#8E9AA8",
   "brand-gray-500": "#5D6978",
-  "brand-gray-500-legacy": "#8E9AA8",
   "brand-white": "#FFFFFF",
   "danger": "#DC2626",
   "warning": "#D97706",
@@ -30,6 +30,9 @@ export declare const semanticColors: {
   "accent-strong": { light: "#00766F", dark: "#00B2AC" },
   "accent-soft": { light: "#E6F5F3", dark: "#17323A" },
   "on-accent": { light: "#FFFFFF", dark: "#FFFFFF" },
+  "action": { light: "#00766F", dark: "#00B2AC" },
+  "action-hover": { light: "#1B1F2A", dark: "#00968E" },
+  "on-action": { light: "#FFFFFF", dark: "#1B1F2A" },
   "danger-soft": { light: "#FDECEC", dark: "#3A2029" },
   "warning-soft": { light: "#FEF3E2", dark: "#392D24" },
 };
@@ -44,8 +47,8 @@ export declare const cssVar: {
   "brand-gray-50": "var(--sm-color-brand-gray-50)",
   "brand-gray-100": "var(--sm-color-brand-gray-100)",
   "brand-gray-300": "var(--sm-color-brand-gray-300)",
+  "brand-gray-400": "var(--sm-color-brand-gray-400)",
   "brand-gray-500": "var(--sm-color-brand-gray-500)",
-  "brand-gray-500-legacy": "var(--sm-color-brand-gray-500-legacy)",
   "brand-white": "var(--sm-color-brand-white)",
   "canvas": "var(--sm-color-canvas)",
   "surface": "var(--sm-color-surface)",
@@ -56,6 +59,9 @@ export declare const cssVar: {
   "accent-strong": "var(--sm-color-accent-strong)",
   "accent-soft": "var(--sm-color-accent-soft)",
   "on-accent": "var(--sm-color-on-accent)",
+  "action": "var(--sm-color-action)",
+  "action-hover": "var(--sm-color-action-hover)",
+  "on-action": "var(--sm-color-on-action)",
   "danger": "var(--sm-color-danger)",
   "danger-soft": "var(--sm-color-danger-soft)",
   "warning": "var(--sm-color-warning)",
@@ -70,11 +76,71 @@ export declare const fontFamily: {
 };
 
 export declare const fontSize: {
+  "display": "3rem",
+  "title-1": "1.875rem",
+  "title-2": "1.5rem",
+  "title-3": "1.25rem",
+  "title-4": "1.125rem",
+  "6xl": "3.75rem",
+  "5xl": "3rem",
+  "4xl": "2.25rem",
+  "3xl": "1.875rem",
+  "2xl": "1.5rem",
+  "xl": "1.25rem",
+  "lg": "1.125rem",
+  "base": "1rem",
+  "sm": "0.875rem",
+  "xs": "0.75rem",
+  "eyebrow": "0.75rem",
   "micro-11": "11px",
   "micro-10": "10px",
 };
 
+export declare const typeStyles: {
+  "display": { fontSize: "3rem", lineHeight: "1.05", fontWeight: "900", letterSpacing: "-0.025em" },
+  "title-1": { fontSize: "1.875rem", lineHeight: "2.25rem", fontWeight: "900", letterSpacing: "-0.025em" },
+  "title-2": { fontSize: "1.5rem", lineHeight: "2rem", fontWeight: "800", letterSpacing: "-0.02em" },
+  "title-3": { fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: "700", letterSpacing: "-0.01em" },
+  "title-4": { fontSize: "1.125rem", lineHeight: "1.75rem", fontWeight: "700", letterSpacing: "0" },
+  "6xl": { fontSize: "3.75rem", lineHeight: "1" },
+  "5xl": { fontSize: "3rem", lineHeight: "1" },
+  "4xl": { fontSize: "2.25rem", lineHeight: "2.5rem" },
+  "3xl": { fontSize: "1.875rem", lineHeight: "2.25rem" },
+  "2xl": { fontSize: "1.5rem", lineHeight: "2rem" },
+  "xl": { fontSize: "1.25rem", lineHeight: "1.75rem" },
+  "lg": { fontSize: "1.125rem", lineHeight: "1.75rem" },
+  "base": { fontSize: "1rem", lineHeight: "1.5rem" },
+  "sm": { fontSize: "0.875rem", lineHeight: "1.25rem" },
+  "xs": { fontSize: "0.75rem", lineHeight: "1rem" },
+  "eyebrow": { fontSize: "0.75rem", lineHeight: "1rem", fontWeight: "600", letterSpacing: "0.1em" },
+  "micro-11": { fontSize: "11px" },
+  "micro-10": { fontSize: "10px" },
+};
+
+export declare const spacing: {
+  "space-0_5": "0.125rem",
+  "space-1": "0.25rem",
+  "space-1_5": "0.375rem",
+  "space-2": "0.5rem",
+  "space-2_5": "0.625rem",
+  "space-3": "0.75rem",
+  "space-4": "1rem",
+  "space-5": "1.25rem",
+  "space-6": "1.5rem",
+  "space-8": "2rem",
+  "space-10": "2.5rem",
+  "space-12": "3rem",
+  "space-14": "3.5rem",
+  "space-16": "4rem",
+  "space-20": "5rem",
+  "space-24": "6rem",
+  "space-32": "8rem",
+};
+
 export declare const radius: {
+  "radius-control": "6px",
+  "radius-button": "6px",
+  "radius-pill": "9999px",
   "radius-card": "14px",
 };
 
