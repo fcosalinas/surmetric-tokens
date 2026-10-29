@@ -57,6 +57,10 @@ const sha = (buf) => createHash("sha256").update(buf).digest("hex");
 // solo eso: etiquetas autocerradas expandidas y sin espacio entre etiquetas. Cualquier otra
 // diferencia (un atributo, un color, algo que el almacén quite) sigue contando como cambio.
 const svgNorm = (buf) => buf.toString("utf8").replace(/<([A-Za-z][\w:-]*)([^<>]*?)\s*\/>/g, "<$1$2></$1>").replace(/>\s+</g, "><").trim();
+// La página agrega al README servido una sección generada ("Consuming this system" + índice de
+// cards). Se compara sin ella; al publicar, la página la vuelve a agregar.
+const GENERATED_TAIL = /\r?\n-{3}\r?\n\r?\n## Consuming this system \(generated[\s\S]*$/;
+const asReadme = (buf) => Buffer.from(buf.toString("utf8").replace(GENERATED_TAIL, "").trimEnd() + "\n");
 const rel = (p) => p.replaceAll("\\", "/");
 
 function repoTag() {
@@ -129,7 +133,11 @@ function compare(served) {
     const local = readFileSync(join(ROOT, src));
     const there = join(served, path);
     if (!existsSync(there)) changed.push({ path, src, why: "no está en la copia servida" });
-    else if (sha(readFileSync(there)) !== sha(local)) changed.push({ path, src, why: "distinto" });
+    else {
+      const readme = path === "project/README.md";
+      const served = readFileSync(there);
+      if (sha(readme ? asReadme(served) : served) !== sha(readme ? asReadme(local) : local)) changed.push({ path, src, why: "distinto" });
+    }
   }
 
   const group = idx.assetGroups?.[GROUP];
@@ -147,9 +155,11 @@ function compare(served) {
     else if (rec.size !== statSync(blob).size || rec.type !== "image/svg+xml" || rec.name !== a.name)
       indexIssues.push(`${a.name}: registro con name/size/type distinto del blob servido`);
   }
+  // El orden de las tiles es de la página (se puede reordenar ahí): solo se exige que estén todas.
   const wantOrder = assets.map((a) => a.name);
   const order = group?.order ?? [];
-  if (wantOrder.some((n, i) => order[i] !== n)) indexIssues.push(`orden de ${GROUP}: [${order.join(", ")}]`);
+  const missing = wantOrder.filter((n) => !order.includes(n));
+  if (missing.length) indexIssues.push(`faltan en el orden de ${GROUP}: ${missing.join(", ")}`);
   if (!(idx.groups ?? []).includes(GROUP)) indexIssues.push(`"${GROUP}" no está en groups`);
   const notInRepo = Object.keys(group?.files ?? {}).filter((n) => !wantOrder.includes(n));
 
@@ -316,7 +326,8 @@ if (mode === "index") {
     else fail(`${a.name} no tiene registro ni subida.`);
   }
   const names = assets.map((a) => a.name);
-  idx.assetGroups = { ...idx.assetGroups, [GROUP]: { ...group, files, order: [...names, ...(group.order ?? []).filter((n) => !names.includes(n))] } };
+  const order = group.order ?? [];
+  idx.assetGroups = { ...idx.assetGroups, [GROUP]: { ...group, files, order: [...order, ...names.filter((n) => !order.includes(n))] } };
   if (!(idx.groups ?? []).includes(GROUP)) idx.groups = [...(idx.groups ?? []), GROUP];
 
   const what = [...plan.files.map((p) => p.replace(/^project\//, "")), plan.uploads.length ? `${plan.uploads.length} logo(s)` : null].filter(Boolean);

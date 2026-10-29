@@ -12,6 +12,8 @@
 | grupo de assets **Logos** | `logo/surmetric-*.svg` (el favicon y sus derivados no) | subidas al almacén de assets, con su registro en `assetGroups` del índice |
 | `project/assets/Logos/README.md` | `logo/README.md` | íntegro |
 | `project/design-system.json` (índice) | — | se lee justo antes y se reescribe al final: solo cambian el grupo Logos, `groups` y `lastChange` |
+
+Dos cosas las maneja la página y el sync las respeta. Al README servido le agrega una sección generada ("Consuming this system" con un índice), que se ignora al comparar. Y el orden de las tiles de Logos se puede cambiar en la página: el sync solo agrega al final los nombres que falten.
 | `project/components/Cover/preview.html` | — | a mano. El sync no la regenera: avisa si cambiaron el nombre, la paleta o las escalas que dibuja. |
 
 ## Cómo se corre
@@ -46,10 +48,6 @@ Cuando un SVG cambia, se sube como blob nuevo y el anterior queda en el almacén
 
 | Fecha | Versión que lo reemplazó | Archivo | Blob huérfano |
 |---|---|---|---|
-| 2026-10-29 | v0.2.1 | `surmetric-lockup.svg` | `b08fb56e794e75d203656ee21c71b766` |
-| 2026-10-29 | v0.2.1 | `surmetric-lockup-white.svg` | `cea694f199f0cac6ec4f78e5b0081e3f` |
-| 2026-10-29 | v0.2.1 | `surmetric-lockup-mono.svg` | `3ed7f655de3c49e082c8c2bd328790e8` |
-| 2026-10-29 | v0.2.1 | `surmetric-isotipo.svg` | `67621e1c8961bd906d8b7e8d135ada91` |
-| 2026-10-29 | v0.2.1 | `surmetric-isotipo-white.svg` | `b4fa7e3a5d7672c29b5f2e2b16a3d4ad` |
-| 2026-10-29 | v0.2.1 | `surmetric-isotipo-mono.svg` | `2e781191371f28912139ba07c404dc5d` |
 <!-- huerfanos:end -->
+
+Borrados (2026-10-29, a pedido): los 6 blobs de la primera subida de la v0.2.0, reemplazados en la v0.2.1 (`b08fb56e…`, `cea694f1…`, `3ed7f655…`, `67621e1c…`, `b4fa7e3a…`, `2e781191…`).
