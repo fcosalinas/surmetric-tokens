@@ -2,6 +2,13 @@
 
 Política de versiones y de qué cuenta como breaking: README, "Desarrollo y versiones".
 
+## 0.2.3 — 2026-10-29
+
+Aditivo: ningún token cambia.
+
+- **Favicon** en `logo/`: `favicon.svg`, `favicon.ico` (16/32/48), `apple-touch-icon.png` (180, fondo blanco), `icon-192.png` e `icon-512.png`. Es el isotipo tal cual, también a 16 px. Se generan con `python scripts/logo.py` y `npm run favicon`. Cómo instalarlos en cada app: README, sección Logo. El porqué: `docs/LOGO.md`.
+- Para las apps: copiar los favicon a `app/` (Next) o `public/`. Tienen que copiarse porque no se sirven desde `node_modules`.
+
 ## 0.2.2 — 2026-10-29
 
 Parche: ningún valor de token cambia.

@@ -7,4 +7,4 @@ Logo Surmetric en vector, el primero que existe: hasta v0.2.0 solo había PNG. S
 | `surmetric-lockup-mono.svg` | Escala de grises: el cubo teal pasa a neutros |
 | `surmetric-isotipo.svg`, `-white`, `-mono` | Igual que su lockup, para espacios chicos |
 
-El viewBox está ceñido a la tinta: el margen libre (la altura del isotipo) lo pone quien lo usa. Bajo ~24px el isotipo se empasta; falta un favicon simplificado.
+El viewBox está ceñido a la tinta: el margen libre (la altura del isotipo) lo pone quien lo usa. El favicon (`favicon.svg`, `.ico` y los PNG de app) está en `logo/` del repo y no se proyecta a este grupo.

@@ -48,7 +48,7 @@ El grupo **Logos** tiene las seis variantes en vector:
 - la versión mono, para escala de grises;
 - el isotipo en las mismas tres variantes.
 
-Se escalan sin deformar y sin cambiar colores. El isotipo pierde detalle bajo unos 24px, así que no sirve como favicon: falta una versión simplificada. El margen libre alrededor del logo es la altura del isotipo.
+Se escalan sin deformar y sin cambiar colores. El favicon es el isotipo tal cual en un cuadrado. A 16px se lee solo como silueta, y a 32px y más se ve completo. Los archivos están en `logo/` del repo; no forman parte de este grupo. El margen libre alrededor del logo es la altura del isotipo.
 
 ## Iconografía
 

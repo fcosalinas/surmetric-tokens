@@ -18,7 +18,7 @@ Design tokens **Core** de Surmetric. Una sola fuente de verdad, `tokens/tokens.j
 Sin registry: se instala desde el tag de git.
 
 ```sh
-npm install github:fcosalinas/surmetric-tokens#v0.2.2
+npm install github:fcosalinas/surmetric-tokens#v0.2.3
 ```
 
 El repo es privado. La máquina que instala (también la de CI o Vercel) necesita acceso de lectura a GitHub.
@@ -143,11 +143,32 @@ Solo cambian los tokens semánticos (`canvas`, `surface`, `ink`, `action`…). L
 | `surmetric-lockup.svg` | Versión principal, sobre fondos claros |
 | `surmetric-lockup-white.svg` | Sobre `brand-dark` o fotos oscuras |
 | `surmetric-lockup-mono.svg` | Escala de grises (impresión sin color) |
-| `surmetric-isotipo.svg` · `-white` · `-mono` | Avatares y espacios chicos. Bajo ~24px pierde detalle: el favicon necesita una versión simplificada (pendiente) |
+| `surmetric-isotipo.svg` · `-white` · `-mono` | Avatares y espacios chicos |
+| `favicon.svg` · `favicon.ico` | Favicon: el isotipo de color en un cuadrado, fondo transparente. El ICO trae 16, 32 y 48 px. |
+| `apple-touch-icon.png` | 180 px, fondo blanco con margen: iOS rellena de negro lo transparente |
+| `icon-192.png` · `icon-512.png` | Íconos del manifest de PWA, transparentes |
 
 ```tsx
 import logo from "surmetric-tokens/logo/surmetric-lockup.svg";
 ```
+
+Los favicon no se sirven desde `node_modules`: cada app los copia una vez a su carpeta pública, y los vuelve a copiar cuando suba de versión si el logo cambió. En Next (App Router) basta con dejarlos con los nombres de la convención y Next arma los `<link>` solo:
+
+```sh
+cp node_modules/surmetric-tokens/logo/favicon.ico            app/favicon.ico
+cp node_modules/surmetric-tokens/logo/favicon.svg            app/icon.svg
+cp node_modules/surmetric-tokens/logo/apple-touch-icon.png   app/apple-icon.png
+```
+
+Sin Next, en `public/` y con estos `<link>`:
+
+```html
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+```
+
+A 16 px el isotipo se lee como silueta (bloque gris y cubo teal); se probó engrosar el trazo y no mejora. Las pantallas de alta densidad usan 32 px, donde se ve completo.
 
 Cómo se construyó y qué tan fiel es al PNG original: [`docs/LOGO.md`](docs/LOGO.md).
 
@@ -189,7 +210,7 @@ npm run build      # regenera dist/, fonts/ y la tabla de este README
 npm run check      # falla si algo generado no está al día con tokens.json
 ```
 
-`dist/`, `fonts/` y `logo/` se commitean: así `npm install github:…` no necesita build. El logo no es parte de `npm run build`; se regenera con `python scripts/logo.py` (requiere `fonttools` y `brotli`).
+`dist/`, `fonts/` y `logo/` se commitean: así `npm install github:…` no necesita build. El logo no es parte de `npm run build`; se regenera con `python scripts/logo.py` (requiere `fonttools` y `brotli`) y después `npm run favicon`, que rasteriza `logo/favicon.svg` con `@resvg/resvg-js`.
 
 ### Qué cuenta como breaking
 

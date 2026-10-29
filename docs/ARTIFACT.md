@@ -9,7 +9,7 @@
 | `project/tokens.json` | `tokens/tokens.json` | íntegro |
 | `project/README.md` | `docs/SISTEMA.md` | íntegro. Es el brand book. No es el `README.md` del repo, que trae instalación y tablas para devs, cosa que el tipo pide no poner. |
 | `project/fonts/*.woff2` | `fonts/*.woff2` | como archivos, solo las que declara `type.fonts` |
-| grupo de assets **Logos** | `logo/*.svg` | subidas al almacén de assets, con su registro en `assetGroups` del índice |
+| grupo de assets **Logos** | `logo/surmetric-*.svg` (el favicon y sus derivados no) | subidas al almacén de assets, con su registro en `assetGroups` del índice |
 | `project/assets/Logos/README.md` | `logo/README.md` | íntegro |
 | `project/design-system.json` (índice) | — | se lee justo antes y se reescribe al final: solo cambian el grupo Logos, `groups` y `lastChange` |
 | `project/components/Cover/preview.html` | — | a mano. El sync no la regenera: avisa si cambiaron el nombre, la paleta o las escalas que dibuja. |

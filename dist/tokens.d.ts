@@ -1,4 +1,4 @@
-// Surmetric Core v0.2.2 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
+// Surmetric Core v0.2.3 — generado desde tokens/tokens.json por scripts/build.mjs. No editar a mano.
 
 export declare const themes: readonly ["light","dark"];
 

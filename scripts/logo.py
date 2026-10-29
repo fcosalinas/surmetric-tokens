@@ -126,6 +126,12 @@ def main():
         # viewBox ceñido a la tinta en los cuatro lados; el área de protección la pone quien lo usa.
         view = (iso_view[0], iso_view[1], r(right), iso_view[3])
         (OUT / f"surmetric-lockup{suffix}.svg").write_text(svg(view, "\n  ".join(parts), "Surmetric"), "utf-8", newline="\n")
+
+    # Favicon: el isotipo de color tal cual, centrado en un cuadrado del ancho del isotipo. Fondo
+    # transparente. Los PNG y el ICO salen de este archivo con scripts/favicon.mjs.
+    x0, y0, w, h = iso_view[0], iso_view[1], r(iso_view[2] - iso_view[0]), r(iso_view[3] - iso_view[1])
+    square = (x0, r(y0 - (w - h) / 2), r(x0 + w), r(y0 - (w - h) / 2 + w))
+    (OUT / "favicon.svg").write_text(svg(square, isotipo(PALETTES["color"]), "Surmetric"), "utf-8", newline="\n")
     print("logo/ escrito:", ", ".join(sorted(p.name for p in OUT.glob("*.svg"))))
 
 

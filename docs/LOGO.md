@@ -59,13 +59,24 @@ El wordmark del raster mide `#131F28`, no `#1B1F2A`. Se usó `#1B1F2A` porque es
 - **Blanca**: igual a la de color, con trazo y wordmark blancos. Así resuelve el raster `logo-lockup-white.png` los fondos oscuros.
 - **Mono**: los cubos grises quedan iguales (ya son neutros). El cubo teal pasa a neutros más oscuros (`#8E9AA8` arriba, `#2D3140` izquierda, `#5D6978` derecha), para que siga destacando sin color. El raster `logo-lockup-mono.png` hacía lo mismo, pero con un wordmark de otra tipografía. Aquí el wordmark es Montserrat, como en las otras variantes.
 
+## Favicon (v0.2.3)
+
+`favicon.svg` es el isotipo de color **tal cual**, centrado en un cuadrado del ancho del isotipo (422.4) y con fondo transparente. Sale de `scripts/logo.py`. `npm run favicon` (`scripts/favicon.mjs`, con `@resvg/resvg-js` 2.6.2) genera desde ese SVG:
+
+| Archivo | Tamaño | Fondo |
+|---|---|---|
+| `favicon.ico` | 16, 32 y 48 px (PNG embebidos) | transparente |
+| `apple-touch-icon.png` | 180 px | `#FFFFFF`, con 10% de margen por lado: iOS rellena de negro lo transparente |
+| `icon-192.png`, `icon-512.png` | 192 y 512 px | transparente (manifest de PWA) |
+
+**Decisión (2026-10-29)**: el isotipo completo también a 16 px. A ese tamaño se lee como silueta: un bloque gris con el cubo teal, y los trazos casi desaparecen. Se probó trazo 24 en vez de 13.4 y se veía más oscuro sin ganar lectura. Las alternativas descartadas fueron solo el cubo teal (habría sido una variante nueva de la marca) y el trazo grueso. A 32 px y más se ve completo.
+
 ## Verificación
 
 El lockup se superpuso al raster en Chrome headless con `mix-blend-mode: difference`, ambos opacos sobre blanco, a escala 1:1. El resultado es negro en toda la superficie. Solo quedan bordes de 1 px de antialiasing y pequeñas marcas en los vértices exteriores, porque el raster tiene esquinas algo más agudas que las uniones redondeadas.
 
 ## Lo que falta
 
-- **Favicon**: bajo ~24 px el isotipo se empasta (cuatro cubos y trazos de 13% del paso). Necesita una versión simplificada (por ejemplo, solo el cubo teal, o trazo más grueso), y esa es una decisión de diseño.
-- **Derivados PNG / ICO** (favicon, apple-touch, android-chrome, OG): no se generan. Agregarlos al build requiere un rasterizador como dependencia (por ejemplo `@resvg/resvg-js`).
+- **Imagen OG** (vista previa al compartir enlaces): no se genera. Necesita una composición propia (lockup sobre un fondo de 1200×630), que es una decisión de diseño.
 - **Área de protección**: la skill de branding la define como "la altura del isotipo (el cubo)". El viewBox de los SVG está ceñido a la tinta, sin margen.
 - **Reemplazo en las apps y en la skill**: songal, IAnsurance y la skill `surmetric-branding` siguen usando los PNG, incluido el JPEG con extensión `.png` y los isotipos con el fragmento de "S" (§10 de las decisiones). Ninguna app se tocó.

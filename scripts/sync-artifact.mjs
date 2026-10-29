@@ -85,7 +85,8 @@ function desired() {
   }
   for (const src of files.values()) if (!existsSync(join(ROOT, src))) fail(`No existe ${src} en el repo.`);
 
-  const onDisk = readdirSync(join(ROOT, "logo")).filter((f) => f.endsWith(".svg"));
+  // Solo las variantes de marca (surmetric-*.svg). favicon.svg y sus PNG/ICO no van al grupo Logos.
+  const onDisk = readdirSync(join(ROOT, "logo")).filter((f) => f.startsWith("surmetric-") && f.endsWith(".svg"));
   const extra = onDisk.filter((f) => !LOGO_ORDER.includes(f));
   if (extra.length) fail(`logo/ tiene SVG fuera del orden conocido (${extra.join(", ")}): agrégalos a LOGO_ORDER.`);
   const assets = LOGO_ORDER.filter((n) => onDisk.includes(n)).map((name) => {
