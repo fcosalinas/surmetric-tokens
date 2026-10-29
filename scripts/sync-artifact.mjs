@@ -64,7 +64,7 @@ const asReadme = (buf) => Buffer.from(buf.toString("utf8").replace(GENERATED_TAI
 const rel = (p) => p.replaceAll("\\", "/");
 
 function repoTag() {
-  const git = (...a) => execFileSync("git", ["-C", ROOT, ...a], { encoding: "utf8" }).trim();
+  const git = (...a) => execFileSync("git", ["-C", ROOT, ...a], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
   let tag;
   try {
     tag = git("describe", "--tags", "--exact-match", "HEAD");
@@ -192,26 +192,37 @@ function coverReview(repo, servedTokens) {
 
 // ---------- qué no muestra la página (según format.md del tipo) ----------
 
-const SHOWN = new Set(["color", "type", "spacing", "radius", "shadow"]);
-const MOTION = new Set(["easing", "motion", "duration", "transition", "animation"]);
 const NAME = /^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$/;
 const LENGTH = /^(-?\d*\.?\d+(px|rem|em|%)|0)$/;
 const COLOR = /^(#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})|(rgba?|hsla?|oklch|oklab|lab|lch|color)\([^()]*\)|\{[^{}]+\})$/i;
 
-function gaps(t) {
+// Qué muestra la página se lee de su ficha generada (project/api/tokens.md), que la página reescribe
+// en cada guardado. Sin ficha en la copia servida no se afirma nada: se dice que no se pudo verificar.
+function gaps(t, card) {
   const out = [];
-  for (const [k, v] of Object.entries(t)) {
-    if (k === "name" || k === "version" || SHOWN.has(k)) continue;
-    if (MOTION.has(k)) out.push(`familia "${k}": viaja en tokens.json pero la página no la muestra ("No motion family").`);
-    else if (v && Array.isArray(v.tokens)) out.push(`familia "${k}": se muestra como sección genérica, sin vista propia.`);
-    else out.push(`clave "${k}": la página la guarda pero no la lee.`);
-  }
   const styles = t.type.groups.flatMap((g) => g.styles);
-  const withTracking = styles.filter((s) => s.letterSpacing !== undefined).map((s) => s.name);
-  if (withTracking.length)
-    out.push(`letterSpacing de ${withTracking.join(", ")}: va en la clase que compila la página, pero la vista de Tipografía solo lee tamaño, peso e interlineado.`);
-  const noLeading = styles.filter((s) => s.lineHeight === undefined).map((s) => s.name);
-  if (noLeading.length) out.push(`${noLeading.join(", ")}: sin interlineado (heredan el del contenedor, a propósito).`);
+  if (!card) out.push("la copia servida no trae project/api/tokens.md: no se pudo verificar qué muestra la página.");
+  else {
+    for (const [k, v] of Object.entries(t)) {
+      if (k === "type" || !v || !Array.isArray(v.tokens)) continue;
+      const missing = v.tokens.filter((tok) => !card.includes(`\`--${tok.name}\``)).map((tok) => tok.name);
+      if (missing.length) out.push(`${k}: no aparecen en la ficha: ${missing.join(", ")}.`);
+    }
+    // Fila de estilo: | `name` | css | size / line[, ...] | weight | family | usage |
+    const rows = new Map();
+    for (const m of card.matchAll(/^\| `([^`]+)` \| [^|]+ \| ([^|/]+?) \/ ([^,|]+?)(?:,[^|]*)? \| (\d+) \|/gm)) rows.set(m[1], { size: m[2].trim(), line: m[3].trim(), weight: m[4] });
+    const assumedLine = [], assumedWeight = [], absent = [];
+    for (const s of styles) {
+      const row = rows.get(s.name);
+      if (!row) { absent.push(s.name); continue; }
+      if (s.lineHeight === undefined) assumedLine.push(`${s.name} (${row.line})`);
+      if (s.fontWeight === undefined) assumedWeight.push(`${s.name} (${row.weight})`);
+    }
+    if (absent.length) out.push(`estilos que no aparecen en la ficha: ${absent.join(", ")}.`);
+    if (assumedLine.length) out.push(`la página les asigna interlineado a estilos que en Core lo heredan: ${assumedLine.join(", ")}.`);
+    if (assumedWeight.length) out.push(`la página les asigna peso a estilos que en Core lo heredan: ${assumedWeight.join(", ")}.`);
+    if (!out.length) out.push("nada: la ficha muestra todos los tokens y estilos, sin valores agregados.");
+  }
 
   // Lo que el formato descartaría: no debería haber nada.
   const drops = [];
@@ -253,9 +264,9 @@ function report(r, tag) {
   return { pending: lines.length > 0, text: lines.join("\n") + dirty };
 }
 
-function printGaps(t) {
-  const { out, drops } = gaps(t);
-  console.log("\nQué queda fuera de la vista (no es un error):");
+function printGaps(t, card) {
+  const { out, drops } = gaps(t, card);
+  console.log("\nQué muestra la página distinto del repo (según su ficha generada; no es un error):");
   for (const g of out) console.log(`  - ${g}`);
   if (drops.length) {
     console.log("\nLo que la página DESCARTARÍA según format.md:");
@@ -276,7 +287,8 @@ if (mode === "plan" || mode === "check") {
   else console.log(`${mode === "check" ? "Proyección DESFASADA" : "Por publicar"} (surmetric-tokens@${tag.tag}):\n${rep.text}`);
   if (r.notInRepo.length) console.log(`\nEn el grupo ${GROUP} del artifact pero no en logo/: ${r.notInRepo.join(", ")}. No se tocan; decide si se quitan.`);
   if (cover.length) console.log(`\nLa portada (project/components/Cover/preview.html) dibuja datos que cambiaron: ${cover.join(", ")}. Revísala a mano; este script no la regenera.`);
-  const drops = printGaps(r.tokens);
+  const cardPath = join(served, "project/api/tokens.md");
+  const drops = printGaps(r.tokens, existsSync(cardPath) ? readFileSync(cardPath, "utf8") : null);
 
   if (mode === "plan") {
     if (!args.out) fail("Falta --out <dir>.");

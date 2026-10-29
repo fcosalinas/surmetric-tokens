@@ -13,6 +13,7 @@ Usa una carpeta nueva del scratchpad por corrida: `<S>/served`, `<S>/out` y `<S>
      - `project/README.md`
      - `project/assets/Logos/README.md`
      - cada `project/fonts/<archivo>` que liste `tokens/tokens.json` en `type.fonts`
+     - `project/api/tokens.md`, la ficha que genera la página. No se publica nunca: el script la usa para reportar qué muestra la página. Si todavía no existe, sigue.
    - Después lee cada blob que el índice registre en `assetGroups.Logos.files`, con el mismo `out_dir`. Va **una llamada por blob**, con su id en `path` (singular): `paths` no acepta ids de asset. Las llamadas pueden ir en paralelo.
    - Si un archivo no se sirve, sigue: el script lo trata como nuevo.
 2. **Plan**: `npm run sync:artifact -- --served <S>/served --out <S>/out`.

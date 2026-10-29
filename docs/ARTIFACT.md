@@ -33,12 +33,15 @@ Los scripts npm no funcionan solos en una terminal ni en CI: el artifact es priv
 - `npm run sync:artifact -- --served <dir> --out <dir>`: arma el plan y los archivos a publicar.
 - `npm run check:artifact -- --served <dir>`: sale con 1 si la proyección está desfasada respecto del repo.
 
-## Qué no se ve en la página
+## Qué muestra la página distinto del repo
 
-- **`easing`** (`ease-out-expo`): el formato del tipo no tiene familia de movimiento ("No motion family"). Viaja en `tokens.json`, pero no se muestra.
-- **`letterSpacing`** de los títulos y del `eyebrow`: va en la clase que compila la página, pero la vista de Tipografía solo lee tamaño, peso e interlineado.
-- **`uppercase` del `eyebrow`**: no es un token. Está en el texto del sistema y en la receta del README.
-- **Lo que vive en `dist/`** (preset de Tailwind 3, `theme.css`, tipos TS) y las recetas de componentes: son del paquete npm, no del sistema.
+La página genera en cada guardado una ficha, `project/api/tokens.md`, con lo que entendió de `tokens.json`. `/sync-artifact` la baja y el script compara contra ella. Verificado el 2026-10-29, con la ficha de la v0.2.3:
+
+- **Todos los tokens aparecen**, incluido `ease-out-expo`: la ficha tiene una sección Easing. El "No motion family" de `format.md` no aplica a una familia llamada `easing`.
+- **El tracking de los títulos y del `eyebrow` aparece** (por ejemplo "letter-spacing -0.025em").
+- **La página agrega valores donde Core no los define a propósito.** A `micro-11` y `micro-10` les asigna interlineado 1.4 (en Core heredan el del contenedor). A la escala `xs`…`6xl` y a los micro les asigna peso 400 (en Core heredan). Esos valores quedan en el `tokens.css` que genera la página, así que un diseño hecho en Claude con esas clases fija interlineado y peso que en las apps no existen. No tiene arreglo desde el repo: el formato no tiene forma de decir "hereda".
+- **El `uppercase` del eyebrow** no es un token: está solo en el texto del sistema y en la receta.
+- **Lo que vive en `dist/`** (preset de Tailwind 3, `theme.css`, tipos TS) y las recetas de componentes son del paquete npm, no del sistema.
 
 `check:artifact` también valida `tokens.json` contra las reglas de descarte de `format.md` (nombres, alias, largos y topes). Si algo se descartaría, lo lista y falla.
 
