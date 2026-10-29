@@ -2,6 +2,14 @@
 
 Política de versiones y de qué cuenta como breaking: README, "Desarrollo y versiones".
 
+## 0.2.2 — 2026-10-29
+
+Parche: ningún valor de token cambia.
+
+- **`/sync-artifact`** (Claude Code) y `npm run sync:artifact` / `npm run check:artifact`: proyectan el repo en el sistema de diseño "Surmetric Core" de Claude y verifican que no esté desfasado. Solo publican lo que cambió. Ver `docs/ARTIFACT.md`.
+- `docs/SISTEMA.md`: el texto del sistema de diseño (su README) pasa a vivir en el repo. `logo/README.md`: la nota del grupo Logos.
+- README: el paso 5 de "Publicar una versión" usa `/sync-artifact`.
+
 ## 0.2.1 — 2026-10-29
 
 Parche: ningún valor de token cambia.

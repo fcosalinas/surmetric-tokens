@@ -18,7 +18,7 @@ Design tokens **Core** de Surmetric. Una sola fuente de verdad, `tokens/tokens.j
 Sin registry: se instala desde el tag de git.
 
 ```sh
-npm install github:fcosalinas/surmetric-tokens#v0.2.1
+npm install github:fcosalinas/surmetric-tokens#v0.2.2
 ```
 
 El repo es privado. La máquina que instala (también la de CI o Vercel) necesita acceso de lectura a GitHub.
@@ -209,7 +209,7 @@ Mientras sea 0.x, un breaking sube el minor y lo aditivo o un parche sube el pat
 2. `npm run build` y revisar el diff.
 3. Subir `version` en `package.json`, volver a correr `npm run build` y anotar en `CHANGELOG.md` qué cambia y qué tiene que hacer cada app.
 4. `npm run check` en verde, `git commit`, tag anotado `git tag -a vX.Y.Z` y `git push --follow-tags`. Un tag publicado nunca se mueve.
-5. Actualizar la proyección del sistema de diseño en Claude desde ese tag.
+5. Actualizar la proyección del sistema de diseño en Claude desde ese tag: **`/sync-artifact`** en Claude Code. Sube y publica solo lo que cambió y termina con `npm run check:artifact` en verde. Antes del paso 1 conviene correr `/sync-artifact` una vez, para confirmar que la proyección no tiene cambios hechos en la página que el sync pisaría. Detalle y límites: [`docs/ARTIFACT.md`](docs/ARTIFACT.md).
 
 Cada app fija un tag exacto, y subir de versión es un PR explícito en la app. Orden de adopción, por costo: yolotengo → sitio-web-songal → IAnsurance → piatio → lex-semaforo (sin colores de marca mientras rija C1) → symdat.
 
